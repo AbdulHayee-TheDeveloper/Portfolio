@@ -1,0 +1,182 @@
+{% load static %}
+<section id="skills" class="py-5 site-section" style="background-color: #07112a;">
+  <div class="container">
+    <h2 class="text-center mb-5 simple-glow-title" style="color:#4fffb0;">🧠 Skills & Expertise</h2>
+
+    <div class="row justify-content-center">
+      {% for skill in skills %}
+      <div class="col-md-6 col-lg-4 mb-4">
+        <article class="vibrant-skill-card" tabindex="0">
+          
+          {% if skill.icon %}
+          <div class="skill-icon-wrapper">
+            <img src="{{ skill.icon.url }}" alt="{{ skill.title }}" class="skill-icon">
+          </div>
+          {% else %}
+          <div class="skill-icon-wrapper">
+            <div class="skill-icon-placeholder">💡</div>
+          </div>
+          {% endif %}
+
+          <h5 class="skill-name">{{ skill.title }}</h5>
+
+          {% if skill.proficiency %}
+          <div class="skill-proficiency">
+            <span class="proficiency-badge">{{ skill.proficiency }}</span>
+          </div>
+          {% endif %}
+
+          {% if skill.category %}
+          <div class="skill-category mb-2">
+            <span class="category-tag">{{ skill.category }}</span>
+          </div>
+          {% endif %}
+
+          {% if skill.description %}
+          <p class="skill-description">{{ skill.description }}</p>
+          {% endif %}
+
+          <div class="skill-footer">
+            <span class="skill-badge">View Details</span>
+          </div>
+
+        </article>
+      </div>
+      {% empty %}
+      <div class="col-12 text-center text-muted py-5">
+        <p style="font-size: 1.2rem;">💡 No skills added yet.</p>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<style>
+.simple-glow-title {
+    text-shadow: 0 0 5px rgba(79, 255, 176, 0.3);
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+
+.vibrant-skill-card {
+    background: linear-gradient(135deg, 
+        #0a1628 0%, 
+        #0d1b3e 50%,
+        #132844 100%
+    );
+    border: 2px solid transparent;
+    border-image: linear-gradient(135deg, 
+        rgba(79, 255, 176, 0.4), 
+        rgba(0, 194, 255, 0.4)
+    ) 1;
+    border-radius: 15px;
+    padding: 30px;
+    transition: all 0.3s ease;
+    min-height: 320px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+.vibrant-skill-card:hover {
+    background: linear-gradient(135deg, 
+        #0d1b3e 0%, 
+        #1a2d52 100%
+    );
+    box-shadow: 
+        0 0 30px rgba(79, 255, 176, 0.3),
+        0 0 60px rgba(0, 194, 255, 0.2);
+    transform: scale(1.03);
+}
+
+.skill-icon-wrapper { margin-bottom: 20px; }
+
+.skill-icon {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 12px;
+    border: 2px solid rgba(79, 255, 176, 0.3);
+    transition: all 0.3s ease;
+}
+
+.skill-icon-placeholder {
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(79, 255, 176, 0.1);
+    border: 2px solid rgba(79, 255, 176, 0.3);
+    border-radius: 12px;
+    font-size: 2.5rem;
+}
+
+.vibrant-skill-card:hover .skill-icon,
+.vibrant-skill-card:hover .skill-icon-placeholder {
+    border-color: #4fffb0;
+    box-shadow: 0 0 25px rgba(79, 255, 176, 0.5);
+    transform: scale(1.05);
+}
+
+.skill-name { color: #4fffb0; font-weight: 700; font-size: 1.3rem; margin-bottom: 15px; }
+
+.proficiency-badge {
+    background: linear-gradient(135deg, rgba(79, 255, 176, 0.2), rgba(0, 194, 255, 0.2));
+    color: #4fffb0;
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    border: 1px solid rgba(79, 255, 176, 0.4);
+    text-transform: uppercase;
+}
+
+.category-tag {
+    background: linear-gradient(135deg, rgba(0, 212, 255, 0.2), rgba(79, 255, 176, 0.2));
+    color: #00d4ff;
+    padding: 4px 12px;
+    border-radius: 15px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    border: 1px solid rgba(0, 212, 255, 0.4);
+    text-transform: uppercase;
+}
+
+.skill-description {
+    color: #e0e0e0;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin: 15px 0 20px;
+    flex: 1;
+}
+
+.skill-badge {
+    background: rgba(79, 255, 176, 0.1);
+    color: #4fffb0;
+    padding: 8px 20px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    border: 1px solid rgba(79, 255, 176, 0.3);
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.vibrant-skill-card:hover .skill-badge {
+    background: rgba(79, 255, 176, 0.2);
+    box-shadow: 0 0 15px rgba(79, 255, 176, 0.3);
+}
+
+@media (max-width: 768px) {
+    .vibrant-skill-card { padding: 25px; min-height: 280px; }
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('🧠 Skills loaded - Vibrant Gradient');
+});
+</script>

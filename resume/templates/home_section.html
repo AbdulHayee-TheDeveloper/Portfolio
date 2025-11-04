@@ -1,0 +1,169 @@
+{% load static %}
+<section id="hero-big home" class="hero-fullpage site-section">
+  <div class="hero-bg"></div>
+
+  <div class="hero-inner container-fluid">
+    <div class="hero-grid">
+
+      <!-- Left: text and social / badges -->
+      <div class="hero-left">
+        <div class="intro-lines">
+          <h4 id="line1" class="typewriter-text small-lead stagger"></h4>
+          <h1 id="line2" class="typewriter-text main-name stagger"></h1>
+          <h2 id="line3" class="typewriter-text profession stagger"></h2>
+
+          <p id="line4" class="intro-text stagger"></p>
+          <p id="line5" class="intro-text stagger"></p>
+
+          <div class="hero-ctas stagger">
+            <li class="btn-primary"><a class="nav-link" href="#contact">Contact</a></li>
+            <a class="btn-ghost" href="{% url 'resume' %}">Download Resume</a>
+          </div>
+
+          <div class="skill-badges" aria-hidden="true">
+            <span class="stagger">Python</span><span class="stagger">Django</span><span class="stagger">JavaScript</span><span class="stagger">React</span><span class="stagger">NLP</span>
+          </div>
+
+          <div class="social-row">
+            <a class="social-link stagger" href="https://github.com/" target="_blank" rel="noopener">
+              <img src="{% static 'images/github.png' %}" alt="GitHub">
+            </a>
+            <a class="social-link stagger" href="https://www.linkedin.com/" target="_blank" rel="noopener">
+              <img src="{% static 'images/linkedin.png' %}" alt="LinkedIn">
+            </a>
+            <a class="social-link stagger" href="mailto:75ahmadjutt@gmail.com">
+              <img src="{% static 'images/gmail.jpg' %}" alt="Email">
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: large circular image -->
+      <div class="hero-right">
+        <div class="circular-image-container stagger">
+          <img class="circular-image" src="{% static 'images/profile.jpeg' %}" alt="Muhammad Ahmad">
+        </div>
+
+        <div class="quick-info">
+          <div class="info-pill stagger">Software Engineer</div>
+          <div class="info-pill stagger">Full Stack Developer</div>
+          <div class="info-pill stagger">NLP Enthusiast</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<style>
+:root{
+  --navy-1: #07112a;
+  --navy-2: #041022;
+  --accent: #4fffb0;
+  --accent-2: #00c2ff;
+  --muted: #cfe7df;
+}
+.hero-fullpage { position: relative; min-height: 92vh; display:flex; align-items:center; width:100%; box-sizing:border-box; padding: 36px 0; overflow:visible; }
+.hero-bg {
+  position: fixed; inset:0; z-index:0;
+  background-color: var(--navy-1);
+  background-image:
+    linear-gradient(180deg, rgba(7,17,42,0.98), rgba(3,9,22,0.96)),
+    radial-gradient(900px 320px at 72% 36%, rgba(0,194,255,0.03), transparent 12%),
+    radial-gradient(700px 260px at 18% 82%, rgba(79,255,176,0.02), transparent 10%),
+    url('{% static "images/pattern.png" %}');
+  background-attachment: fixed; background-size: cover; background-repeat: no-repeat; background-position: center top;
+  filter: saturate(1.02);
+}
+.hero-inner { position: relative; z-index:2; width:100%; max-width:1400px; margin:0 auto; padding: 0 28px; box-sizing:border-box; }
+.hero-grid { display:grid; grid-template-columns: 1fr 520px; gap:48px; align-items:center; }
+.hero-left .intro-lines { max-width:900px; padding: 18px 8px; }
+.small-lead { color: rgba(79,255,176,0.98); font-weight:700; font-size:1.05rem; margin-bottom:8px; letter-spacing:0.4px; }
+.main-name { color:#fff; font-size:clamp(3rem, 6.2vw, 4.2rem); margin:6px 0; font-weight:900; letter-spacing:-1px; text-shadow: 0 12px 40px rgba(0,0,0,0.6); }
+.profession { color: rgba(220,245,237,0.98); font-size:clamp(1.15rem, 2.6vw, 1.6rem); margin-bottom:12px; font-weight:700; }
+.intro-text { color: var(--muted); font-size:1.15rem; line-height:1.8; margin-top:12px; opacity:0; transform: translateY(6px); transition: opacity .46s ease, transform .46s ease; }
+.intro-text.show { opacity:1; transform: translateY(0); }
+.hero-ctas { margin-top:20px; display:flex; gap:14px; flex-wrap:wrap; align-items:center; }
+.btn-primary, .btn-ghost { padding:12px 18px; border-radius:12px; text-decoration:none; font-weight:800; display:inline-block; }
+.btn-primary { background: linear-gradient(90deg,var(--accent-2),var(--accent)); color:#04101a; box-shadow: 0 14px 46px rgba(0,194,255,0.08); }
+.btn-ghost { border:1px solid rgba(255,255,255,0.06); color:#e9fef0; background: rgba(255,255,255,0.01); }
+.skill-badges { margin-top:18px; display:flex; gap:10px; flex-wrap:wrap; }
+.skill-badges span { background: rgba(79,255,176,0.08); color:var(--muted); padding:8px 12px; border-radius:999px; font-weight:700; border:1px solid rgba(79,255,176,0.06); }
+.social-row { margin-top:18px; display:flex; gap:12px; align-items:center; }
+.social-row .social-link img { width:64px; height:64px; border-radius:12px; padding:10px; background: rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.04); transition: transform .22s ease, box-shadow .22s ease; box-shadow:0 12px 30px rgba(0,0,0,0.45); }
+.social-row .social-link img:hover { transform: translateY(-8px) scale(1.06); border-color: var(--accent); box-shadow: 0 28px 68px rgba(79,255,176,0.08); }
+.hero-right { display:flex; flex-direction:column; gap:18px; align-items:center; justify-content:center; }
+.circular-image-container { width:420px; height:420px; border-radius:50%; overflow:hidden; display:flex; align-items:center; justify-content:center; position:relative; box-shadow: 0 40px 120px rgba(3,8,20,0.75), inset 0 2px 0 rgba(255,255,255,0.02); background: radial-gradient(circle at 30% 25%, rgba(0,194,255,0.03), transparent 20%); transition: transform .5s cubic-bezier(.2,.9,.2,1); }
+.circular-image-container::before { content:""; position:absolute; inset:auto; width: calc(100% + 20px); height: calc(100% + 20px); border-radius:50%; background: conic-gradient(from 200deg, rgba(79,255,176,0.12), rgba(0,194,255,0.06)); filter: blur(14px); z-index:0; opacity:.95; }
+.circular-image { width:100%; height:100%; object-fit:cover; object-position:center 18%; transition: transform .6s cubic-bezier(.2,.9,.2,1); }
+.circular-image-container:hover { transform: translateY(-8px) scale(1.02); }
+.circular-image-container:hover .circular-image { transform: scale(1.045) rotate(-0.3deg); }
+.quick-info { display:flex; gap:10px; flex-wrap:wrap; justify-content:center; margin-top:6px; }
+.info-pill { background: rgba(255,255,255,0.02); padding:8px 12px; border-radius:999px; border:1px solid rgba(255,255,255,0.04); color:var(--muted); font-weight:700; }
+@media (max-width: 1200px) {
+  .hero-grid { grid-template-columns: 1fr 420px; gap:28px; }
+  .circular-image-container { width:360px; height:360px; }
+}
+@media (max-width: 900px) {
+  .hero-grid { grid-template-columns: 1fr; gap:20px; }
+  .hero-left { order:2; }
+  .hero-right { order:1; }
+  .circular-image-container { width:260px; height:260px; }
+  .main-name { font-size: clamp(2rem, 7.5vw, 2.8rem); }
+  .social-row .social-link img { width:56px; height:56px; }
+}
+@media (max-width: 480px) {
+  .circular-image-container { width:200px; height:200px; }
+  .social-row .social-link img { width:48px; height:48px; padding:8px; border-radius:10px; }
+}
+.hero-inner, .intro-lines, .circular-image-container { opacity:0; transform: translateY(12px); transition: opacity .6s ease, transform .6s cubic-bezier(.2,.9,.2,1); }
+.hero-inner.visible, .intro-lines.visible, .circular-image-container.visible { opacity:1; transform: translateY(0); }
+.hero-inner * { position: relative; z-index: 2; }
+</style>
+
+<script>
+(function(){
+  const lines = [
+    { id: "line1", text: "Hi, my name is", delay: 0 },
+    { id: "line2", text: "Abdul Hayee", delay: 800 },
+    { id: "line3", text: "I build production-ready web apps", delay: 1200 },
+    { id: "line4", text: "I specialize in Django, REST APIs, frontend integration, and NLP.", delay: 2200 },
+    { id: "line5", text: "Trainer, curriculum designer, and lifelong learner focused on UX and performance.", delay: 2200 }
+  ];
+
+  lines.forEach(({ id, text, delay }) => {
+    setTimeout(() => {
+      const el = document.getElementById(id);
+      if (!el) return;
+      if (el.classList.contains("typewriter-text")) {
+        let i = 0;
+        el.textContent = "";
+        const interval = setInterval(() => {
+          if (i < text.length) {
+            el.textContent += text.charAt(i);
+          i++;
+          } else {
+            clearInterval(interval);
+            el.classList.add("done");
+            if (id === "line3") {
+              const p4 = document.getElementById("line4");
+              const p5 = document.getElementById("line5");
+              if (p4) p4.classList.add("show");
+              if (p5) setTimeout(()=> p5.classList.add("show"), 260);
+            }
+          }
+        }, 28);
+      } else {
+        el.textContent = text;
+        el.classList.add("show");
+      }
+    }, delay);
+  });
+
+  document.addEventListener('DOMContentLoaded', () => {
+    setTimeout(()=> {
+      document.querySelectorAll('.hero-inner, .intro-lines, .circular-image-container').forEach(el => el.classList.add('visible'));
+    }, 120);
+  });
+})();
+</script>

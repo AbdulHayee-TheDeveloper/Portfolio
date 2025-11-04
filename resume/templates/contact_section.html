@@ -1,0 +1,644 @@
+{% load static %}
+<section id="contact" class="py-5 site-section" style="background-color: #07112a">
+    <div class="container">
+        <h2 class="text-center mb-5 simple-glow-title" style="color:#4fffb0;">📬 Get In Touch</h2>
+        
+        <div class="row justify-content-center">
+            <!-- Contact Info Section (Left) -->
+            <div class="col-lg-5 col-md-6 mb-4">
+                <div class="contact-info-card">
+                    <h3 class="contact-subtitle">Abdul Hayee</h3>
+                    <p class="contact-intro">Full Stack Developer specializing in Django, Python, and modern web technologies. Let's work together!</p>
+                    
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <div class="contact-icon">📧</div>
+                            <div class="contact-text">
+                                <h5>Email</h5>
+                                <a href="mailto:ahayee535@gmail.com">ahayee535@gmail.com</a>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">📱</div>
+                            <div class="contact-text">
+                                <h5>Phone</h5>
+                                <a href="tel:+923129080881">+92 312 9080881</a>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">📍</div>
+                            <div class="contact-text">
+                                <h5>Location</h5>
+                                <p>214 RB Al Rehmat Villas, House P5<br>Lower Canal Road, Jaranwala Road<br>Faisalabad, Pakistan</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Social Links -->
+                    <div class="social-links mt-4">
+                        <a href="https://linkedin.com/in/your-profile" target="_blank" class="social-icon" title="LinkedIn">💼</a>
+                        <a href="https://github.com/your-username" target="_blank" class="social-icon" title="GitHub">💻</a>
+                        <a href="https://twitter.com/your-handle" target="_blank" class="social-icon" title="Twitter">🐦</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contact Form Section (Right) - IMPROVED -->
+            <div class="col-lg-6 col-md-6">
+                <div class="contact-form-card">
+                    <h4 class="form-heading">Send me a message</h4>
+                    <p class="form-subheading">Fill out the form below and I'll get back to you within 24 hours.</p>
+
+                    {% if success %}
+                    <div class="success-message">
+                        <span class="success-icon">✅</span>
+                        <div>
+                            <p class="success-title">Message Sent Successfully!</p>
+                            <p class="success-text">Thank you for reaching out. I'll respond to your email shortly.</p>
+                        </div>
+                    </div>
+                    {% endif %}
+
+                    <form method="POST" action="" class="modern-contact-form" novalidate>
+                        {% csrf_token %}
+                        
+                        <!-- Name Field -->
+                        <div class="form-group">
+                            <label for="id_name" class="required-label">
+                                <span class="label-icon">👤</span>
+                                Full Name
+                            </label>
+                            <input 
+                                type="text" 
+                                name="name" 
+                                id="id_name"
+                                class="form-input"
+                                placeholder="e.g., John Doe"
+                                required
+                                maxlength="200"
+                                value="{{ form.name.value|default:'' }}"
+                            >
+                            {% if form.name.errors %}
+                            <span class="error-text">❌ {{ form.name.errors.0 }}</span>
+                            {% endif %}
+                        </div>
+
+                        <!-- Email Field -->
+                        <div class="form-group">
+                            <label for="id_email" class="required-label">
+                                <span class="label-icon">📧</span>
+                                Email Address
+                            </label>
+                            <input 
+                                type="email" 
+                                name="email" 
+                                id="id_email"
+                                class="form-input"
+                                placeholder="e.g., john.doe@example.com"
+                                required
+                                value="{{ form.email.value|default:'' }}"
+                            >
+                            {% if form.email.errors %}
+                            <span class="error-text">❌ {{ form.email.errors.0 }}</span>
+                            {% endif %}
+                        </div>
+
+                        <!-- Phone Field -->
+                        <div class="form-group">
+                            <label for="id_phone">
+                                <span class="label-icon">📱</span>
+                                Phone Number <span class="optional-badge">(Optional)</span>
+                            </label>
+                            <input 
+                                type="tel" 
+                                name="phone" 
+                                id="id_phone"
+                                class="form-input"
+                                placeholder="e.g., +92 300 1234567"
+                                maxlength="20"
+                                value="{{ form.phone.value|default:'' }}"
+                            >
+                            {% if form.phone.errors %}
+                            <span class="error-text">❌ {{ form.phone.errors.0 }}</span>
+                            {% endif %}
+                        </div>
+
+                        <!-- Message Field -->
+                        <div class="form-group">
+                            <label for="id_message" class="required-label">
+                                <span class="label-icon">💬</span>
+                                Your Message
+                            </label>
+                            <textarea 
+                                name="message" 
+                                id="id_message"
+                                class="form-textarea"
+                                placeholder="Tell me about your project, question, or just say hello..."
+                                required
+                                rows="6"
+                            >{{ form.message.value|default:'' }}</textarea>
+                            <div class="char-counter">
+                                <span id="charCount">0</span>/1000 characters
+                            </div>
+                            {% if form.message.errors %}
+                            <span class="error-text">❌ {{ form.message.errors.0 }}</span>
+                            {% endif %}
+                        </div>
+
+                        <!-- Submit Button -->
+                        <button type="submit" class="submit-button">
+                            <span class="button-text">Send Message</span>
+                            <span class="button-icon">📤</span>
+                        </button>
+
+                        <p class="privacy-note">
+                            🔒 Your information is safe and will never be shared with third parties.
+                        </p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+/* ========== SECTION TITLE ========== */
+.simple-glow-title {
+    text-shadow: 0 0 5px rgba(79, 255, 176, 0.3);
+    font-weight: 800;
+    letter-spacing: 1px;
+    margin-bottom: 50px;
+}
+
+/* ========== CONTACT INFO CARD - GLASS EFFECT ========== */
+.contact-info-card {
+    background: linear-gradient(135deg, 
+        rgba(13, 27, 62, 0.9) 0%, 
+        rgba(26, 40, 71, 0.85) 50%, 
+        rgba(13, 27, 62, 0.9) 100%
+    );
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(79, 255, 176, 0.25);
+    border-radius: 20px;
+    padding: 40px;
+    height: 100%;
+    transition: all 0.3s ease;
+    box-shadow: 
+        0 8px 32px rgba(0, 0, 0, 0.37),
+        inset 0 1px 0 rgba(79, 255, 176, 0.1);
+}
+
+.contact-info-card:hover {
+    background: linear-gradient(135deg, 
+        rgba(13, 27, 62, 0.95) 0%, 
+        rgba(26, 40, 71, 0.9) 50%, 
+        rgba(13, 27, 62, 0.95) 100%
+    );
+    border-color: rgba(79, 255, 176, 0.4);
+    box-shadow: 
+        0 8px 32px rgba(79, 255, 176, 0.2),
+        inset 0 1px 0 rgba(79, 255, 176, 0.2);
+    transform: scale(1.02);
+}
+
+.contact-subtitle {
+    color: #4fffb0;
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+
+.contact-intro {
+    color: #e0e0e0;
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 30px;
+}
+
+/* ========== CONTACT DETAILS ========== */
+.contact-details {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.contact-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    padding: 15px;
+    background: rgba(79, 255, 176, 0.08);
+    border: 1px solid rgba(79, 255, 176, 0.2);
+    border-radius: 12px;
+    transition: all 0.3s ease;
+}
+
+.contact-item:hover {
+    background: rgba(79, 255, 176, 0.12);
+    border-color: rgba(79, 255, 176, 0.4);
+    transform: translateX(5px);
+}
+
+.contact-icon {
+    font-size: 2rem;
+    flex-shrink: 0;
+}
+
+.contact-text {
+    flex: 1;
+}
+
+.contact-text h5 {
+    color: #4fffb0;
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+.contact-text p,
+.contact-text a {
+    color: #e0e0e0;
+    font-size: 0.95rem;
+    margin: 0;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.contact-text a:hover {
+    color: #4fffb0;
+    text-decoration: underline;
+}
+
+/* ========== SOCIAL LINKS ========== */
+.social-links {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}
+
+.social-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    background: rgba(79, 255, 176, 0.15);
+    border: 1px solid rgba(79, 255, 176, 0.3);
+    border-radius: 50%;
+    font-size: 1.5rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.social-icon:hover {
+    background: rgba(79, 255, 176, 0.25);
+    border-color: #4fffb0;
+    transform: scale(1.1) rotate(5deg);
+    box-shadow: 0 0 15px rgba(79, 255, 176, 0.3);
+}
+
+/* ========== CONTACT FORM CARD - GLASS EFFECT ========== */
+.contact-form-card {
+    background: linear-gradient(135deg, 
+        rgba(13, 27, 62, 0.9) 0%, 
+        rgba(26, 40, 71, 0.85) 50%, 
+        rgba(13, 27, 62, 0.9) 100%
+    );
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(79, 255, 176, 0.25);
+    border-radius: 20px;
+    padding: 40px;
+    transition: all 0.3s ease;
+    box-shadow: 
+        0 8px 32px rgba(0, 0, 0, 0.37),
+        inset 0 1px 0 rgba(79, 255, 176, 0.1);
+}
+
+.contact-form-card:hover {
+    border-color: rgba(79, 255, 176, 0.4);
+    box-shadow: 
+        0 8px 32px rgba(79, 255, 176, 0.2),
+        inset 0 1px 0 rgba(79, 255, 176, 0.2);
+}
+
+.form-heading {
+    color: #4fffb0;
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.form-subheading {
+    color: #b0b0b0;
+    font-size: 0.9rem;
+    margin-bottom: 30px;
+    line-height: 1.5;
+}
+
+/* ========== SUCCESS MESSAGE ========== */
+.success-message {
+    background: linear-gradient(135deg, 
+        rgba(79, 255, 176, 0.2), 
+        rgba(79, 255, 176, 0.1)
+    );
+    border: 2px solid rgba(79, 255, 176, 0.5);
+    border-radius: 15px;
+    padding: 20px;
+    margin-bottom: 30px;
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    animation: slideDown 0.5s ease;
+    backdrop-filter: blur(5px);
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.success-icon {
+    font-size: 2.5rem;
+}
+
+.success-title {
+    color: #4fffb0;
+    font-weight: 700;
+    font-size: 1.1rem;
+    margin: 0 0 5px 0;
+}
+
+.success-text {
+    color: #e0e0e0;
+    font-size: 0.9rem;
+    margin: 0;
+}
+
+/* ========== FORM STYLING ========== */
+.modern-contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.form-group label {
+    color: #4fffb0;
+    font-weight: 600;
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.label-icon {
+    font-size: 1.1rem;
+}
+
+.required-label::after {
+    content: '*';
+    color: #ff6b6b;
+    margin-left: 4px;
+    font-weight: bold;
+}
+
+.optional-badge {
+    color: #999;
+    font-size: 0.85rem;
+    font-weight: 400;
+    font-style: italic;
+}
+
+/* ========== INPUT FIELDS - GLASS EFFECT ========== */
+.form-input,
+.form-textarea {
+    width: 100%;
+    padding: 14px 18px;
+    background: rgba(13, 27, 62, 0.5);
+    border: 2px solid rgba(79, 255, 176, 0.2);
+    border-radius: 12px;
+    color: #e0e0e0;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    outline: none;
+    font-family: inherit;
+    backdrop-filter: blur(5px);
+}
+
+.form-textarea {
+    min-height: 140px;
+    resize: vertical;
+    line-height: 1.6;
+}
+
+.form-input:focus,
+.form-textarea:focus {
+    border-color: #4fffb0;
+    background: rgba(79, 255, 176, 0.1);
+    box-shadow: 0 0 15px rgba(79, 255, 176, 0.25);
+    transform: translateY(-2px);
+}
+
+.form-input::placeholder,
+.form-textarea::placeholder {
+    color: #777;
+    font-style: italic;
+}
+
+.form-input:valid,
+.form-textarea:valid {
+    border-color: rgba(79, 255, 176, 0.3);
+}
+
+/* Character Counter */
+.char-counter {
+    text-align: right;
+    color: #999;
+    font-size: 0.85rem;
+    margin-top: -5px;
+}
+
+.error-text {
+    color: #ff6b6b;
+    font-size: 0.85rem;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    animation: shake 0.3s ease;
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    75% { transform: translateX(5px); }
+}
+
+/* ========== SUBMIT BUTTON - GLASS EFFECT ========== */
+.submit-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 16px 35px;
+    background: linear-gradient(135deg, 
+        rgba(79, 255, 176, 0.2), 
+        rgba(79, 255, 176, 0.12)
+    );
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(79, 255, 176, 0.4);
+    border-radius: 50px;
+    color: #4fffb0;
+    font-size: 1.05rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.submit-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, 
+        transparent, 
+        rgba(79, 255, 176, 0.3), 
+        transparent
+    );
+    transition: left 0.5s ease;
+}
+
+.submit-button:hover::before {
+    left: 100%;
+}
+
+.submit-button:hover {
+    background: linear-gradient(135deg, 
+        rgba(79, 255, 176, 0.3), 
+        rgba(79, 255, 176, 0.18)
+    );
+    border-color: #4fffb0;
+    box-shadow: 0 0 25px rgba(79, 255, 176, 0.4);
+    transform: translateY(-3px) scale(1.02);
+}
+
+.submit-button:active {
+    transform: translateY(0) scale(0.98);
+}
+
+.button-icon {
+    font-size: 1.3rem;
+    animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+}
+
+/* Privacy Note */
+.privacy-note {
+    text-align: center;
+    color: #999;
+    font-size: 0.85rem;
+    margin-top: 15px;
+    margin-bottom: 0;
+}
+
+/* ========== RESPONSIVE DESIGN ========== */
+@media (max-width: 991px) {
+    .contact-info-card {
+        margin-bottom: 30px;
+    }
+}
+
+@media (max-width: 768px) {
+    .contact-info-card,
+    .contact-form-card {
+        padding: 30px;
+    }
+    
+    .contact-subtitle {
+        font-size: 1.6rem;
+    }
+    
+    .simple-glow-title {
+        font-size: 1.8rem;
+    }
+    
+    .form-heading {
+        font-size: 1.3rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .contact-info-card,
+    .contact-form-card {
+        padding: 25px;
+    }
+    
+    .social-links {
+        flex-wrap: wrap;
+    }
+    
+    .submit-button {
+        padding: 14px 28px;
+        font-size: 0.95rem;
+    }
+    
+    .form-input,
+    .form-textarea {
+        padding: 12px 15px;
+    }
+}
+</style>
+
+
+<script>
+// Character counter for message field
+document.addEventListener('DOMContentLoaded', function() {
+    const messageField = document.getElementById('id_message');
+    const charCount = document.getElementById('charCount');
+    
+    if (messageField && charCount) {
+        messageField.addEventListener('input', function() {
+            const count = this.value.length;
+            charCount.textContent = count;
+            
+            // Change color based on character count
+            if (count > 900) {
+                charCount.style.color = '#ff6b6b';
+            } else if (count > 700) {
+                charCount.style.color = '#ffa500';
+            } else {
+                charCount.style.color = '#4fffb0';
+            }
+        });
+        
+        // Initialize counter
+        charCount.textContent = messageField.value.length;
+    }
+    
+    console.log('📧 Contact form loaded successfully!');
+});
+</script>
