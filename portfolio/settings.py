@@ -91,10 +91,18 @@ DATABASES = {
     }
 }
 
-if 'DATABASE_URL' in os.environ:
-    DATABASES['default'] = dj_database_url.config(
+import os
+import dj_database_url
+
+# If DATABASE_URL is set (e.g. your Neon Postgres connection string),
+# use it instead of the default SQLite database above. If it's not
+# set, the project just keeps using SQLite as before -- so this is
+# safe even if you forget to set the environment variable one day.
+if os.environ.get("DATABASE_URL"):
+    DATABASES["default"] = dj_database_url.config(
+        default=os.environ.get("DATABASE_URL"),
         conn_max_age=600,
-        conn_health_checks=True,
+        ssl_require=True,
     )
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
