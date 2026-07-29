@@ -1,0 +1,372 @@
+{% load static %}
+<head>
+    <title>All Projects - Abdul Hayee</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+</head>
+
+<body>
+    <!-- Include Same Navbar as Home Page -->
+    {% include 'navbar.html' %}
+
+    <!-- All Projects Section -->
+    <section id="all-projects" class="py-5" style="background-color: #07112a; margin-top: 72px;">
+        <div class="container-fluid text-light">
+            <h2 class="text-center mb-5 simple-glow-title" style="color:#4fffb0;">🚀 All My Projects</h2>
+            
+            <div class="row gy-5 justify-content-center">
+                {% for project in projects_show %}
+                <div class="col-md-6 col-lg-4">
+                    <div class="simple-project-card">
+                        {% if project.demo %}
+                        <a href="{{ project.demo }}" target="_blank" class="project-image-link">
+                            <div class="image-wrapper">
+                                <img src="{% static project.path %}" class="project-image" alt="{{ project.title }}">
+                                <div class="image-overlay">
+                                    <span class="view-demo">View Demo</span>
+                                </div>
+                            </div>
+                        </a>
+                        {% endif %}
+
+                        <div class="card-body-custom">
+                            <div class="card-content">
+                                <div class="title-status-wrapper">
+                                    <h4 class="project-title">{{ project.title }}</h4>
+                                    {% if project.status %}
+                                    <span class="status-badge">{{ project.status }}</span>
+                                    {% endif %}
+                                </div>
+
+                                {% if project.description %}
+                                <p class="project-description">{{ project.description }}</p>
+                                {% else %}
+                                <p class="project-description">An amazing project built with modern technologies.</p>
+                                {% endif %}
+
+                                {% if project.tech %}
+                                <div class="tech-stack">
+                                    {% for tech in project.tech %}
+                                    <span class="tech-badge">{{ tech }}</span>
+                                    {% endfor %}
+                                </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% empty %}
+                <div class="col-12 text-center">
+                    <p style="font-size: 1.2rem; color: #999;">💡 No projects available yet.</p>
+                </div>
+                {% endfor %}
+            </div>
+
+            <!-- Pagination -->
+            {% if projects_show.has_other_pages %}
+            <nav class="d-flex justify-content-center mt-5">
+                <ul class="pagination">
+                    {% if projects_show.has_previous %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ projects_show.previous_page_number }}">Previous</a>
+                    </li>
+                    {% endif %}
+
+                    {% for num in projects_show.paginator.page_range %}
+                    <li class="page-item {% if projects_show.number == num %}active{% endif %}">
+                        <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+                    </li>
+                    {% endfor %}
+
+                    {% if projects_show.has_next %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ projects_show.next_page_number }}">Next</a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </nav>
+            {% endif %}
+
+            <!-- Back to Home Button -->
+            <div class="text-center mt-5">
+                <a href="/" class="simple-glow-button">← Back to Home</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+
+<style>
+/* === Global Background === */
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: #07112a;
+}
+
+body {
+    background-color: #07112a;
+    background-image:
+        linear-gradient(180deg, rgba(7,17,42,0.96), rgba(2,10,26,0.95)),
+        radial-gradient(800px 240px at 75% 30%, rgba(0,194,255,0.03), transparent 12%),
+        radial-gradient(600px 200px at 20% 80%, rgba(79,255,176,0.02), transparent 10%),
+        url('/static/images/pattern.png');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center top;
+    background-size: cover;
+    color: #e9fef0;
+    min-height: 100vh;
+}
+
+/* === Projects Styles === */
+.simple-glow-title {
+    text-shadow: 0 0 5px rgba(79, 255, 176, 0.3);
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+
+/* ========== PROJECT CARD - GLASS EFFECT ========== */
+.simple-project-card {
+    background: linear-gradient(135deg, 
+        rgba(13, 27, 62, 0.9) 0%, 
+        rgba(26, 40, 71, 0.85) 50%, 
+        rgba(13, 27, 62, 0.9) 100%
+    );
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(79, 255, 176, 0.25);
+    border-radius: 15px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 
+        0 8px 32px rgba(0, 0, 0, 0.37),
+        inset 0 1px 0 rgba(79, 255, 176, 0.1);
+}
+
+.simple-project-card:hover {
+    background: linear-gradient(135deg, 
+        rgba(13, 27, 62, 0.95) 0%, 
+        rgba(26, 40, 71, 0.9) 50%, 
+        rgba(13, 27, 62, 0.95) 100%
+    );
+    border-color: rgba(79, 255, 176, 0.5);
+    box-shadow: 
+        0 8px 32px rgba(79, 255, 176, 0.2),
+        0 12px 48px rgba(0, 0, 0, 0.5),
+        inset 0 1px 0 rgba(79, 255, 176, 0.2);
+    transform: scale(1.03);
+}
+
+.image-wrapper {
+    position: relative;
+    overflow: hidden;
+}
+
+.project-image {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+.image-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(79, 255, 176, 0.9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.view-demo {
+    color: #000;
+    font-weight: 700;
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.project-image-link:hover .project-image {
+    transform: scale(1.1);
+}
+
+.project-image-link:hover .image-overlay {
+    opacity: 1;
+}
+
+.card-body-custom {
+    padding: 25px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.card-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.title-status-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 15px;
+    gap: 10px;
+}
+
+.project-title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #4fffb0;
+    margin: 0;
+}
+
+.simple-project-card:hover .project-title {
+    text-shadow: 0 0 8px rgba(79, 255, 176, 0.4);
+}
+
+.status-badge {
+    background: rgba(79, 255, 176, 0.2);
+    color: #4fffb0;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    border: 1px solid rgba(79, 255, 176, 0.4);
+    white-space: nowrap;
+}
+
+.project-description {
+    font-size: 0.95rem;
+    color: #e0e0e0;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    flex: 1;
+}
+
+.tech-stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: auto;
+}
+
+.tech-badge {
+    background: rgba(79, 255, 176, 0.15);
+    border: 1px solid rgba(79, 255, 176, 0.3);
+    color: #4fffb0;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+.simple-project-card:hover .tech-badge {
+    background: rgba(79, 255, 176, 0.2);
+    border-color: rgba(79, 255, 176, 0.5);
+}
+
+/* ========== BACK BUTTON ========== */
+.simple-glow-button {
+    display: inline-block;
+    padding: 15px 40px;
+    color: #4fffb0;
+    font-size: 1.1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    text-decoration: none;
+    letter-spacing: 2px;
+    background: linear-gradient(135deg, 
+        rgba(13, 27, 62, 0.9) 0%, 
+        rgba(26, 40, 71, 0.85) 100%
+    );
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(79, 255, 176, 0.3);
+    border-radius: 50px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.simple-glow-button:hover {
+    color: #4fffb0;
+    background: linear-gradient(135deg, 
+        rgba(13, 27, 62, 0.95) 0%, 
+        rgba(26, 40, 71, 0.9) 100%
+    );
+    border-color: #4fffb0;
+    box-shadow: 0 0 20px rgba(79, 255, 176, 0.3);
+    transform: scale(1.05);
+}
+
+/* ========== PAGINATION ========== */
+.page-link {
+    background: linear-gradient(135deg, 
+        rgba(13, 27, 62, 0.8) 0%, 
+        rgba(26, 40, 71, 0.75) 100%
+    );
+    border: 1px solid rgba(79, 255, 176, 0.3);
+    color: #4fffb0;
+    backdrop-filter: blur(5px);
+}
+
+.page-link:hover {
+    background: linear-gradient(135deg, 
+        rgba(13, 27, 62, 0.9) 0%, 
+        rgba(26, 40, 71, 0.85) 100%
+    );
+    border-color: #4fffb0;
+    color: #4fffb0;
+    box-shadow: 0 0 10px rgba(79, 255, 176, 0.2);
+}
+
+.page-item.active .page-link {
+    background: linear-gradient(135deg, 
+        rgba(79, 255, 176, 0.9) 0%, 
+        rgba(79, 255, 176, 1) 100%
+    );
+    border-color: #4fffb0;
+    color: #000;
+    font-weight: 700;
+}
+
+/* ========== RESPONSIVE ========== */
+@media (max-width: 768px) {
+    .project-image {
+        height: 200px;
+    }
+    .card-body-custom {
+        padding: 20px;
+    }
+    .simple-project-card:hover {
+        transform: scale(1.02);
+    }
+}
+
+@media (max-width: 576px) {
+    .title-status-wrapper {
+        flex-direction: column;
+    }
+    .simple-glow-button {
+        padding: 12px 30px;
+        font-size: 1rem;
+    }
+}
+</style>
+

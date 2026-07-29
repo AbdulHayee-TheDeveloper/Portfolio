@@ -1,0 +1,307 @@
+{% load static %}
+<section id="projects" class="py-5 site-section">
+  <div class="container-fluid text-light" style="background-color: #07112a;">
+    <h2 class="text-center mb-5 simple-glow-title" style="color:#4fffb0;">🚀 My Projects</h2>
+    
+    <div class="row gy-5 justify-content-center">
+        {% for project in projects_show %}
+        <div class="col-md-6 col-lg-4">
+            <div class="simple-project-card">
+                {% if project.demo %}
+                <a href="{{ project.demo }}" target="_blank" class="project-image-link">
+                    <div class="image-wrapper">
+                        <img src="{% static project.path %}" class="project-image"
+                            alt="{{ project.title }}">
+                        <div class="image-overlay">
+                            <span class="view-demo">View Demo</span>
+                        </div>
+                    </div>
+                </a>
+                {% endif %}
+
+                <div class="card-body-custom">
+                    <div class="card-content">
+                        <div class="title-status-wrapper">
+                            <h4 class="project-title">{{ project.title }}</h4>
+                            {% if project.status %}
+                            <span class="status-badge">{{ project.status }}</span>
+                            {% endif %}
+                        </div>
+
+                        {% if project.description %}
+                        <p class="project-description">
+                            {{ project.description }}
+                        </p>
+                        {% else %}
+                        <p class="project-description">
+                            An amazing project built with modern technologies.
+                        </p>
+                        {% endif %}
+
+                        {% if project.tech %}
+                        <div class="tech-stack">
+                            {% for tech in project.tech %}
+                            <span class="tech-badge">{{ tech }}</span>
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- See More Button -->
+    {% if show_see_more %}
+    <div class="text-center mt-5">
+        <a href="{% url 'all_projects' %}" class="simple-glow-button">
+            <span>See All Projects</span>
+        </a>
+    </div>
+    {% endif %}
+  </div>
+</section>
+
+<style>
+/* ========== SIMPLE GLOW TITLE ========== */
+.simple-glow-title {
+    text-shadow: 0 0 5px rgba(79, 255, 176, 0.3);
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+
+/* ========== PROJECT CARD - GLASS EFFECT ========== */
+.simple-project-card {
+    background: linear-gradient(135deg, 
+        rgba(13, 27, 62, 0.9) 0%, 
+        rgba(26, 40, 71, 0.85) 50%, 
+        rgba(13, 27, 62, 0.9) 100%
+    );
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(79, 255, 176, 0.25);
+    border-radius: 15px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 
+        0 8px 32px rgba(0, 0, 0, 0.37),
+        inset 0 1px 0 rgba(79, 255, 176, 0.1);
+}
+
+.simple-project-card:hover {
+    background: linear-gradient(135deg, 
+        rgba(13, 27, 62, 0.95) 0%, 
+        rgba(26, 40, 71, 0.9) 50%, 
+        rgba(13, 27, 62, 0.95) 100%
+    );
+    border-color: rgba(79, 255, 176, 0.5);
+    box-shadow: 
+        0 8px 32px rgba(79, 255, 176, 0.2),
+        0 12px 48px rgba(0, 0, 0, 0.5),
+        inset 0 1px 0 rgba(79, 255, 176, 0.2);
+    transform: scale(1.03);
+}
+
+/* ========== IMAGE WRAPPER ========== */
+.image-wrapper {
+    position: relative;
+    overflow: hidden;
+}
+
+.project-image {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+    display: block;
+}
+
+.image-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(79, 255, 176, 0.9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.view-demo {
+    color: #000;
+    font-weight: 700;
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.project-image-link:hover .project-image {
+    transform: scale(1.1);
+}
+
+.project-image-link:hover .image-overlay {
+    opacity: 1;
+}
+
+/* ========== CARD BODY ========== */
+.card-body-custom {
+    padding: 25px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.card-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.title-status-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 15px;
+    gap: 10px;
+}
+
+.project-title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #4fffb0;
+    margin: 0;
+    transition: all 0.3s ease;
+}
+
+.simple-project-card:hover .project-title {
+    text-shadow: 0 0 8px rgba(79, 255, 176, 0.4);
+}
+
+.status-badge {
+    background: rgba(79, 255, 176, 0.2);
+    color: #4fffb0;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border: 1px solid rgba(79, 255, 176, 0.4);
+    white-space: nowrap;
+}
+
+.project-description {
+    font-size: 0.95rem;
+    color: #e0e0e0;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    flex: 1;
+}
+
+/* ========== TECH STACK ========== */
+.tech-stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: auto;
+}
+
+.tech-badge {
+    background: rgba(79, 255, 176, 0.15);
+    border: 1px solid rgba(79, 255, 176, 0.3);
+    color: #4fffb0;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.simple-project-card:hover .tech-badge {
+    background: rgba(79, 255, 176, 0.2);
+    border-color: rgba(79, 255, 176, 0.5);
+}
+
+/* ========== SEE ALL BUTTON ========== */
+.simple-glow-button {
+    display: inline-block;
+    padding: 15px 40px;
+    color: #4fffb0;
+    font-size: 1.1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    text-decoration: none;
+    letter-spacing: 2px;
+    background: linear-gradient(135deg, 
+        rgba(13, 27, 62, 0.9) 0%, 
+        rgba(26, 40, 71, 0.85) 100%
+    );
+    border: 1px solid rgba(79, 255, 176, 0.3);
+    border-radius: 50px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.simple-glow-button:hover {
+    color: #4fffb0;
+    background: linear-gradient(135deg, 
+        rgba(13, 27, 62, 0.95) 0%, 
+        rgba(26, 40, 71, 0.9) 100%
+    );
+    border-color: #4fffb0;
+    box-shadow: 0 0 20px rgba(79, 255, 176, 0.3);
+    transform: scale(1.05);
+}
+
+/* ========== RESPONSIVE DESIGN ========== */
+@media (max-width: 768px) {
+    .project-title {
+        font-size: 1.2rem;
+    }
+    
+    .project-image {
+        height: 200px;
+    }
+    
+    .simple-project-card:hover {
+        transform: scale(1.02);
+    }
+    
+    .card-body-custom {
+        padding: 20px;
+    }
+    
+    .simple-glow-title {
+        font-size: 1.8rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .title-status-wrapper {
+        flex-direction: column;
+    }
+    
+    .simple-glow-button {
+        padding: 12px 30px;
+        font-size: 1rem;
+    }
+}
+
+/* ========== SMOOTH SCROLLING ========== */
+.site-section {
+    scroll-margin-top: 80px;
+}
+</style>
+
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('🚀 Projects section loaded (minimal design)!');
+});
+</script>
