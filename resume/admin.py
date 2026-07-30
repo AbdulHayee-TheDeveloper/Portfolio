@@ -6,7 +6,7 @@ Experience model handles both Jobs and Skills
 from django.contrib import admin
 from django.utils.html import format_html
 from .models import Experience, Education, Project, Service, Contact
-
+from django.utils.safestring import mark_safe
 
 # ======================== EXPERIENCE ADMIN (Jobs + Skills) ========================
 
@@ -83,10 +83,10 @@ class ExperienceAdmin(admin.ModelAdmin):
     def type_badge(self, obj):
         """Show type badge with colors"""
         if obj.experience_type == 'job':
-            return format_html(
+            return mark_safe(
                 '<span style="background: #00d4ff; color: #000; padding: 4px 12px; border-radius: 12px; font-weight: 600; font-size: 11px;">JOB</span>'
             )
-        return format_html(
+        return mark_safe(
             '<span style="background: #4fffb0; color: #000; padding: 4px 12px; border-radius: 12px; font-weight: 600; font-size: 11px;">SKILL</span>'
         )
     type_badge.short_description = 'Type'
@@ -122,8 +122,8 @@ class ExperienceAdmin(admin.ModelAdmin):
     def visibility_status(self, obj):
         """Show visibility status"""
         if obj.visible:
-            return format_html('<span style="color: green; font-weight: bold;">✓ Visible</span>')
-        return format_html('<span style="color: red; font-weight: bold;">✗ Hidden</span>')
+            return mark_safe('<span style="color: green; font-weight: bold;">✓ Visible</span>')
+        return mark_safe('<span style="color: red; font-weight: bold;">✗ Hidden</span>')
     visibility_status.short_description = 'Status'
     
     # Custom Actions
@@ -285,14 +285,14 @@ class ContactAdmin(admin.ModelAdmin):
     
     def read_status(self, obj):
         if obj.is_read:
-            return format_html('<span style="color: green; font-weight: bold;">✓ Read</span>')
-        return format_html('<span style="color: orange; font-weight: bold;">✉ Unread</span>')
+            return mark_safe('<span style="color: green; font-weight: bold;">✓ Read</span>')
+        return mark_safe('<span style="color: orange; font-weight: bold;">✉ Unread</span>')
     read_status.short_description = 'Status'
     
     def reply_status(self, obj):
         if obj.replied:
-            return format_html('<span style="color: blue; font-weight: bold;">✓ Replied</span>')
-        return format_html('<span style="color: gray;">- Not Replied</span>')
+            return mark_safe('<span style="color: blue; font-weight: bold;">✓ Replied</span>')
+        return mark_safe('<span style="color: gray;">- Not Replied</span>')
     reply_status.short_description = 'Reply'
     
     def mark_as_read(self, request, queryset):

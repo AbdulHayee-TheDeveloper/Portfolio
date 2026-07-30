@@ -26,5 +26,5 @@ urlpatterns = [
 ]
 
 # Serve media files (uploaded via admin: profile photo, project/skill/education images)
-if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+# if settings.DEBUG:
+#     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
